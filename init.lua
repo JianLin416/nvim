@@ -31,7 +31,16 @@ vim.g.mapleader         = " "
 vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeToggle<CR>', opts)
 
 -- space+d 显示报错
--- vim.api.nvim_set_keymap('n', '<leader>d', '<cmd>lua vim.diagnostic.open_float(nil, { focusable = false })<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>d', '<cmd>lua vim.diagnostic.open_float(nil, { focusable = false })<CR>',
+	{ noremap = true, silent = true })
+
+-- 添加 option+上下移动当前行
+vim.api.nvim_set_keymap('n', '<A-Up>', ':m .-2<CR>==', opts)
+vim.api.nvim_set_keymap('n', '<A-Down>', ':m .+1<CR>==', opts)
+vim.api.nvim_set_keymap('i', '<A-Up>', '<Esc>:m .-2<CR>==gi', opts)
+vim.api.nvim_set_keymap('i', '<A-Down>', '<Esc>:m .+1<CR>==gi', opts)
+vim.api.nvim_set_keymap('v', '<A-Up>', ':m \'<-2<CR>gv=gv', opts)
+vim.api.nvim_set_keymap('v', '<A-Down>', ':m \'>+1<CR>gv=gv', opts)
 
 vim.opt.guicursor = {
 	--配置nvim的光标样式
