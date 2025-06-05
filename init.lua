@@ -1,10 +1,12 @@
 local opt = vim.opt
 opt.number = true
-opt.relativenumber = true
+opt.relativenumber = false
 opt.termguicolors = true
 opt.foldmethod = "indent"
 opt.foldlevel = 99
 opt.foldenable = false
+
+require("keyMaps")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -22,27 +24,9 @@ vim.opt.rtp:prepend(lazypath)
 vim.opt.tabstop         = 4
 vim.opt.shiftwidth      = 4
 
-local opts              = { noremap = true, silent = true }
-
 vim.g.barbar_auto_setup = false
 
--- space+e 打开nvim-tree
-vim.g.mapleader         = " "
-vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeToggle<CR>', opts)
-
--- space+d 显示报错
-vim.api.nvim_set_keymap('n', '<leader>d', '<cmd>lua vim.diagnostic.open_float(nil, { focusable = false })<CR>',
-	{ noremap = true, silent = true })
-
--- 添加 option+上下移动当前行
-vim.api.nvim_set_keymap('n', '<A-Up>', ':m .-2<CR>==', opts)
-vim.api.nvim_set_keymap('n', '<A-Down>', ':m .+1<CR>==', opts)
-vim.api.nvim_set_keymap('i', '<A-Up>', '<Esc>:m .-2<CR>==gi', opts)
-vim.api.nvim_set_keymap('i', '<A-Down>', '<Esc>:m .+1<CR>==gi', opts)
-vim.api.nvim_set_keymap('v', '<A-Up>', ':m \'<-2<CR>gv=gv', opts)
-vim.api.nvim_set_keymap('v', '<A-Down>', ':m \'>+1<CR>gv=gv', opts)
-
-vim.opt.guicursor = {
+vim.opt.guicursor       = {
 	--配置nvim的光标样式
 	"i:ver25",
 	"a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor",
@@ -63,10 +47,19 @@ require('onedark').setup({
 	transparent = true
 })
 
+require('catppuccin').setup({
+	-- 设置catppuccin配色主题
+	flavour = "frappe",
+	transparent_background = true
+})
+
 require('lualine').setup({
 	--使用lualine插件（底下的状态栏）
 	options = { theme = 'auto' }
 })
+
+-- 使用注释插件
+require('Comment').setup()
 
 -- 使用mini.indentscope插件（缩进线）
 require('mini.indentscope').setup()
@@ -77,7 +70,7 @@ require('barbar').setup({
 	auto_hide = true
 })
 
---使用nvim-tree插件
+-- 使用nvim-tree插件
 require("nvim-tree").setup()
 
 local lsps = {
@@ -174,4 +167,4 @@ require('conform').setup({ --使用conform插件 保存自动格式化
 --使用autopairs插件（自动补全括号）
 require("nvim-autopairs").setup()
 
-vim.cmd('colorscheme onedark')
+vim.cmd('colorscheme catppuccin')
