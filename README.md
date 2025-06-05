@@ -8,8 +8,11 @@
 lsp安装
 
 ```bash
-pnpm install -g typescript typescript-language-server @vue/typescript-plugin @vue/language-server vscode-langservers-extracted pyright
+pnpm install -g typescript typescript-language-server @vue/typescript-plugin @vue/language-server vscode-langservers-extracted
 go install golang.org/x/tools/gopls@latest
+
+sudo apt-get install clangd
+brew install llvm
 ```
 
 - vue
@@ -17,6 +20,6 @@ go install golang.org/x/tools/gopls@latest
 - react
 - html
 - css
-- python
 - go
 - lua
+- c & c++

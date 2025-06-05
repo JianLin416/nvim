@@ -73,16 +73,6 @@ require('barbar').setup({
 -- 使用nvim-tree插件
 require("nvim-tree").setup()
 
-local lsps = {
-	"volar",
-	"ts_ls",
-	"html",
-	"cssls",
-	"pyright",
-	"gopls",
-	"lua_ls"
-}
-
 local lspconfig = require("lspconfig")
 
 lspconfig.lua_ls.setup({})
@@ -115,9 +105,9 @@ lspconfig.cssls.setup({})
 
 lspconfig.html.setup({})
 
-lspconfig.pyright.setup({})
-
 lspconfig.gopls.setup({})
+
+lspconfig.clangd.setup({})
 
 require('conform').setup({ --使用conform插件 保存自动格式化
 	formatters_by_ft = {
@@ -150,6 +140,14 @@ require('conform').setup({ --使用conform插件 保存自动格式化
 		},
 		lua = {
 			"lua_ls",
+			format_on_save = true
+		},
+		c = {
+			"clangd",
+			format_on_save = true
+		},
+		cpp = {
+			"clangd",
 			format_on_save = true
 		}
 	},
